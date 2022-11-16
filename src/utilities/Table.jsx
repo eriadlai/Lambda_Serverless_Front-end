@@ -21,8 +21,6 @@ import Switch from '@mui/material/Switch';
 import DeleteIcon from '@mui/icons-material/Delete';
 import FilterListIcon from '@mui/icons-material/FilterList';
 import { visuallyHidden } from '@mui/utils';
-import axios from 'axios';
-const urlAlumnos="https://3ls4od9od7.execute-api.us-west-1.amazonaws.com/dev/Alumno";
 function createData(name, edad, telefono, fecharegistro, asunto) {
   return {
     name,
@@ -33,22 +31,7 @@ function createData(name, edad, telefono, fecharegistro, asunto) {
   };
 }
 
-const rows = [
-  createData('Juan Perez', 30, 6462134576, '10-06-2022', 'Drogas'),
-  createData('Carlos Madrigero', 40, 6465439865, '10-06-2022', 'Relacion'),
-  createData('Bartolomeo Gutierrez', 30, 6464308677, '10-06-2022', 'Familia'),
-  createData('Jorge Magdaleno', 54, 6461115434, '10-06-2022', 'Depresion'),
-  createData('Fernando de la Cruz', 24, 6464360190, '10-06-2022', 'Trastorno'),
-  createData('Antonio Fernandez', 45, 6463335476, '10-06-2022', 'Drogas'),
-  createData('Gerardo Murillo', 47, 6460921453, '10-06-2022', 'Relacion'),
-  createData('Adolfo Cabrera', 27, 6462590845, '10-06-2022', 'Relacion'),
-  createData('Marisol Hernandez', 26, 6462026312, '10-06-2022', 'Adiccion'),
-  createData('Marlenee Manzano', 16, 6461623450, '10-06-2022', 'Adiccion'),
-  createData('Paola Benitez', 15, 6468450123, '10-06-2022', 'Trastorno'),
-  createData('Sara Ponce', 17, 6463205423, '10-06-2022', 'Trastorno'),
-  createData('Gabriela Salazar', 15, 6467772343, '10-06-2022', 'Familia'),
-  createData('Alanis Prados', 20, 6469503401, '10-06-2022', 'Drogas')
-];
+const rows = [];
 
 
 function descendingComparator(a, b, orderBy) {
@@ -113,18 +96,6 @@ const headCells = [
 ];
 
 function EnhancedTableHead(props) {
-    const [data,setData] = useState([]);
-    const peticionesGet = async () => {
-    
-    await axios.get(urlAlumnos)
-    .then( response => {
-        setData(response.data);
-    })
-}
-useEffect((()=>{
-    peticionesGet();
-}))
-
   const { onSelectAllClick, order, orderBy, numSelected, rowCount, onRequestSort } =
     props;
   const createSortHandler = (property) => (event) => {
@@ -236,6 +207,16 @@ EnhancedTableToolbar.propTypes = {
 };
 
 export default function EnhancedTable() {
+  const urlAlumnos="https://3ls4od9od7.execute-api.us-west-1.amazonaws.com/dev/Alumno";
+  const [oData, setData] = useState();
+
+    useEffect(() => {
+        fetch(urlAlumnos)
+            .then(response => response.json())
+            .then(data => setData(data));
+    }, []);
+  
+    console.log(oData);
   const [order, setOrder] = React.useState('asc');
   const [orderBy, setOrderBy] = React.useState('edad');
   const [selected, setSelected] = React.useState([]);

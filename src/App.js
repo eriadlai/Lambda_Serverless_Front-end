@@ -14,7 +14,9 @@ function App() {
             <Grid item xs={3}>
               <Sidebar setMode={setMode} mode={mode} />
             </Grid>
+            <Grid item xs={8}>
             <Router />
+            </Grid>
           </Grid>
         </Stack>
       </Box>
