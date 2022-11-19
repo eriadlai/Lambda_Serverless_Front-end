@@ -11,8 +11,6 @@ const AlumnoContextProvider = ({ children }) => {
       setAlumno(alumno.data[0])
     );
   }, []);
-
-
   return (
     <AlumnosContext.Provider
       value={{alumno}}
@@ -24,4 +22,4 @@ const AlumnoContextProvider = ({ children }) => {
 
 export default AlumnoContextProvider;
 
-export const useInventarioContext = () => useContext(InventarioContext);
+export const useAlumnoContext = () => useContext(AlumnosContext);
