@@ -1,26 +1,24 @@
 import React from "react";
-import { BrowserRouter, Route, Routes } from "react-router-dom";
-import Feed from "../components/Feed";
-import Academico from '../pages/Academico';
-import Enlaces from '../pages/Enlaces';
-import Evaluacion from '../pages/Evaluacion';
-import Financiero from '../pages/Financiero';
-import Inscripciones from '../pages/Inscripciones';
-import Portafolio from '../pages/Portafolio';
+import { Route, Routes } from "react-router-dom";
+import PrivateRoute from "./PrivateRoute";
+import TableAlumnos from "../pages/Alumnos/TableAlumnos";
+import Calificaciones from "../pages/Calificaciones/Calificaciones";
+import Carreras from "../pages/Carreras/Carreras";
+import Docentes from "../pages/Docentes/Docentes";
+import Grupos from "../pages/Grupos/Grupos";
+import Materias from "../pages/Materias/Materias";
 const Router = () => {
   return (
     <>
-      <BrowserRouter>
-        <Routes>
-          <Route path="/" element={<Feed />} />
-          <Route path="/Academico" element={<Academico />} />
-          <Route path="/Enlaces" element={<Enlaces />} />
-          <Route path="/Evaluacion" element={<Evaluacion />} />
-          <Route path="/Financiero" element={<Financiero />} />
-          <Route path="/Inscripciones" element={<Inscripciones />} />
-          <Route path="/Portafolio" element={<Portafolio />} />
-        </Routes>
-      </BrowserRouter>
+      <Routes>
+        <Route path="/" element={<PrivateRoute />} />
+        <Route path="/Alumnos" element={<TableAlumnos />} />
+        <Route path="/Calificaciones" element={<Calificaciones />} />
+        <Route path="/Carreras" element={<Carreras />} />
+        <Route path="/Docentes" element={<Docentes />} />
+        <Route path="/Grupos" element={<Grupos />} />
+        <Route path="/Materias" element={<Materias />} />
+      </Routes>
     </>
   );
 };
