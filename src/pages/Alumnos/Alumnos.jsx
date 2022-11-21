@@ -6,8 +6,9 @@ const Alumnos = () => {
     <Box flex={4} p={2}>
       <Card sx={{ margin: 10 }}>
         <CardContent>
-          <Typography variant="body2" color="text.secondary"></Typography>
-          <Table />
+          <Typography variant="body2" color="text.secondary">
+            <Table />
+          </Typography>
         </CardContent>
       </Card>
     </Box>

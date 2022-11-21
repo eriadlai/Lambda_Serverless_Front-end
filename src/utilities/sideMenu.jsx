@@ -1,10 +1,10 @@
 import PollIcon from "@mui/icons-material/Poll";
-import AttachMoneyIcon from "@mui/icons-material/AttachMoney";
+import GroupWorkIcon from "@mui/icons-material/GroupWork";
 import AssignmentIcon from "@mui/icons-material/Assignment";
 import BusinessIcon from "@mui/icons-material/Business";
-import AddCircleOutlineIcon from "@mui/icons-material/AddCircleOutline";
-import DesktopWindowsIcon from "@mui/icons-material/DesktopWindows";
-import PersonOutlineIcon from "@mui/icons-material/PersonOutline";
+import Diversity3Icon from "@mui/icons-material/Diversity3";
+import GradingIcon from "@mui/icons-material/Grading";
+import GroupsIcon from "@mui/icons-material/Groups";
 export const SideMenu = () => {
   return sideMenu;
 };
@@ -19,13 +19,13 @@ const sideMenu = [
   {
     id: 3,
     title: "Alumnos",
-    icon: <AssignmentIcon />,
+    icon: <Diversity3Icon />,
     path: "/Alumnos",
   },
   {
     id: 2,
     title: "Calificaciones",
-    icon: <AttachMoneyIcon />,
+    icon: <GradingIcon />,
     path: "/Calificaciones",
   },
 
@@ -38,19 +38,19 @@ const sideMenu = [
   {
     id: 5,
     title: "Docentes",
-    icon: <AddCircleOutlineIcon />,
+    icon: <GroupWorkIcon />,
     path: "/Docentes",
   },
   {
     id: 6,
     title: "Grupos",
-    icon: <DesktopWindowsIcon />,
+    icon: <GroupsIcon />,
     path: "/Grupos",
   },
   {
     id: 7,
     title: "Materias",
-    icon: <PersonOutlineIcon />,
+    icon: <AssignmentIcon />,
     path: "/Materias",
   },
 ];

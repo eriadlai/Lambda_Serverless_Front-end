@@ -11,19 +11,19 @@ import { Stack } from "@mui/material";
 const MySwal = withReactContent(Swal);
 const Table = () => {
   const navigate = useNavigate();
-  const [alumno, setAlumno] = React.useState([]);
+  const [carrera, setCarrera] = React.useState([]);
 
   React.useEffect(() => {
-    BaseApiUrl.get("/Alumno").then((alumno) => setAlumno(alumno.data[0]));
+    BaseApiUrl.get("/Carrera").then((carrera) => setCarrera(carrera.data[0]));
   }, []);
 
   const handleEdit = (data) => {
-    navigate("/Alumnos/Editar-Alumno/" + data.ID, { state: data });
+    navigate("/Carrera/Editar-Carrera/" + data.ID, { state: data });
   };
 
   const handleDelete = (id) => {
     console.log(id);
-    BaseApiUrl.delete("/Alumno", { data: { oID: id } })
+    BaseApiUrl.delete("/Carrera", { data: { oID: id } })
       .then((res) => {
         console.log(res);
         MySwal.fire({
@@ -50,21 +50,6 @@ const Table = () => {
       width: 150,
     },
     { field: "Nombre", headerName: "Nombre", width: 300 },
-    {
-      field: "Apellido",
-      headerName: "Apellido",
-      width: 150,
-    },
-    {
-      field: "Matricula",
-      headerName: "Matricula",
-      width: 150,
-    },
-    {
-      field: "Semestre",
-      headerName: "Semestre",
-      width: 150,
-    },
     {
       field: "acciones",
       headerName: "Acciones",
@@ -94,11 +79,11 @@ const Table = () => {
   ];
   return (
     <>
-      <CustomSimpleTitle titulo={"Alumnos"} mb={2} />{" "}
+      <CustomSimpleTitle titulo={"Carreras"} mb={2} />{" "}
       <Stack direction={"row"}>
         <CustomButton
-          texto={"Agregar Alumno"}
-          onClick={() => navigate("/Alumno/Agregar-Alumno")}
+          texto={"Agregar Carrera"}
+          onClick={() => navigate("/Carrera/Agregar-Carrera")}
           styles={{
             marginLeft: "30px",
           }}
@@ -107,7 +92,7 @@ const Table = () => {
       <div style={{ height: 600, width: "100%", padding: 30 }}>
         <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={alumno}
+            rows={carrera}
             columns={columns}
             rowsPerPageOptions={[10]}
             getRowId={(alumno) => alumno.ID}

@@ -11,19 +11,21 @@ import { Stack } from "@mui/material";
 const MySwal = withReactContent(Swal);
 const Table = () => {
   const navigate = useNavigate();
-  const [alumno, setAlumno] = React.useState([]);
+  const [calificacion, setCalificacion] = React.useState([]);
 
   React.useEffect(() => {
-    BaseApiUrl.get("/Alumno").then((alumno) => setAlumno(alumno.data[0]));
+    BaseApiUrl.get("/Calificacion").then((calificacion) =>
+      setCalificacion(calificacion.data[0])
+    );
   }, []);
 
   const handleEdit = (data) => {
-    navigate("/Alumnos/Editar-Alumno/" + data.ID, { state: data });
+    navigate("/Calificacion/Editar-Calificacion/" + data.ID, { state: data });
   };
 
   const handleDelete = (id) => {
     console.log(id);
-    BaseApiUrl.delete("/Alumno", { data: { oID: id } })
+    BaseApiUrl.delete("/Calificacion", { data: { oID: id } })
       .then((res) => {
         console.log(res);
         MySwal.fire({
@@ -49,21 +51,10 @@ const Table = () => {
       headerName: "ID",
       width: 150,
     },
-    { field: "Nombre", headerName: "Nombre", width: 300 },
     {
-      field: "Apellido",
-      headerName: "Apellido",
-      width: 150,
-    },
-    {
-      field: "Matricula",
-      headerName: "Matricula",
-      width: 150,
-    },
-    {
-      field: "Semestre",
-      headerName: "Semestre",
-      width: 150,
+      field: "Evaluacion",
+      headerName: "Evaluacion",
+      width: 300,
     },
     {
       field: "acciones",
@@ -94,11 +85,11 @@ const Table = () => {
   ];
   return (
     <>
-      <CustomSimpleTitle titulo={"Alumnos"} mb={2} />{" "}
+      <CustomSimpleTitle titulo={"Calificaciones"} mb={2} />{" "}
       <Stack direction={"row"}>
         <CustomButton
-          texto={"Agregar Alumno"}
-          onClick={() => navigate("/Alumno/Agregar-Alumno")}
+          texto={"Agregar Calificacion"}
+          onClick={() => navigate("/Calificacion/Agregar-Calificacion")}
           styles={{
             marginLeft: "30px",
           }}
@@ -107,7 +98,7 @@ const Table = () => {
       <div style={{ height: 600, width: "100%", padding: 30 }}>
         <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={alumno}
+            rows={calificacion}
             columns={columns}
             rowsPerPageOptions={[10]}
             getRowId={(alumno) => alumno.ID}

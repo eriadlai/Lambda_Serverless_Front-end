@@ -17,7 +17,6 @@ import {
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
-import { useNavigate } from "react-router-dom";
 
 const drawerWidth = 240;
 
@@ -45,10 +44,11 @@ const SearchIconWrapper = styled("div")(({ theme }) => ({
   display: "flex",
   alignItems: "center",
   justifyContent: "center",
+  color: "black",
 }));
 
 const StyledInputBase = styled(InputBase)(({ theme }) => ({
-  color: "inherit",
+  color: "black",
   "& .MuiInputBase-input": {
     padding: theme.spacing(1, 1, 1, 0),
 
@@ -62,7 +62,6 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const MenuOptions = () => {
-  let navigate = useNavigate();
   // Hook para conocer el tamaño de la pantalla
   const forMobile = useMediaQuery("(min-width:600px)");
 
