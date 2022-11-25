@@ -67,6 +67,10 @@ const Table = () => {
               variant="contained"
               onClick={() => handleDelete(cellValues.row.ID)}
               texto="Eliminar"
+              styles={{marginRight:2, borderColor:"#d32f2f", color:"#d32f2f", '&:hover': {
+                backgroundColor: '#d32f2f',
+                color: 'black',
+            }}}
             >
               Borrar
             </CustomButton>
@@ -74,7 +78,6 @@ const Table = () => {
               variant="contained"
               onClick={() => handleEdit(cellValues.row)}
               texto="EDITAR"
-              styles={{ marginLeft: 2, borderColor: "black", color: "black" }}
             >
               Borrar
             </CustomButton>

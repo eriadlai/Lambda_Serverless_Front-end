@@ -12,7 +12,7 @@ const App = () => {
       createTheme({
         palette: {
           primary: {
-            main: "#F8F65F",
+            main: "#F1C40F",
           },
           secondary: {
             main: darkmode.isDarkMode ? "#ffffff" : "#000000",

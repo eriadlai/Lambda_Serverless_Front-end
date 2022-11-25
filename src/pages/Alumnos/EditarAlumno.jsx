@@ -8,6 +8,7 @@ import { useForm } from "../../hooks/useForms.tsx";
 import Swal from "sweetalert2";
 import withReactContent from "sweetalert2-react-content";
 import CustomButton from "../../components/CustomButton";
+import CustomSelect from "../../components/CustomSelect";
 const MySwal = withReactContent(Swal);
 
 const EditarAlumno = () => {
@@ -15,21 +16,27 @@ const EditarAlumno = () => {
   const location = useLocation();
 
   const { id } = useParams();
+  const {state: data} = useLocation()
+  const [carrera, setCarreras] = React.useState([]);
 
+  React.useEffect(() => {
+    BaseApiUrl.get("/Carrera").then((carrera) => setCarreras(carrera.data[0]));
+  }, []);
+  console.log(carrera)
   const {
     oNombre,
     oApellido,
     oMatricula,
     oFecha_Nacimiento,
     oSemestre,
-    oCarreras_ID,
+    oCarreraID,
   } = useForm({
     oNombre: location?.state.nombre,
     oApellido: location?.state.apellido,
     oMatricula: location?.state.matricula,
     oFecha_Nacimiento: location?.state.fecha_nacimiento,
     oSemestre: location?.state.semestre,
-    oCarreras_ID: location?.state.carreras_id,
+    oCarreraID: location?.state.carreras_id,
   });
 
   const [alumno, setAlumno] = useState({
@@ -38,7 +45,7 @@ const EditarAlumno = () => {
     oMatricula: oMatricula,
     oFecha_Nacimiento: oFecha_Nacimiento,
     oSemestre: oSemestre,
-    oCarreras_ID: oCarreras_ID,
+    oCarreraID: oCarreraID,
   });
 
   const onChange = (value, campo) => {
@@ -50,14 +57,14 @@ const EditarAlumno = () => {
 
   const guardarAlumno = async () => {
     try {
-      await BaseApiUrl.put("/Alumno", {
+      await BaseApiUrl.put("/Alumno",{
         oID: id,
-        oNombre: alumno.oNombre,
-        oApellido: alumno.oApellido,
-        oMatricula: alumno.oMatricula,
-        oFecha_Nacimiento: alumno.oFecha_Nacimiento,
-        oSemestre: alumno.oSemestre,
-        oCarreras_ID: alumno.oCarreras_ID,
+        oNombre:  (alumno.oNombre == null) ?  data.Nombre : alumno.oNombre,
+        oApellido: (alumno.oApellido == null) ?  data.Apellido : alumno.oApellido,
+        oMatricula: (alumno.oMatricula == null) ?  data.Matricula : alumno.oMatricula,
+        oFecha_Nacimiento: (alumno.oFecha_Nacimiento == null) ?  data.Fecha_Nacimiento : alumno.oFecha_Nacimiento,
+        oSemestre: (alumno.oSemestre == null) ?  data.Semestre : alumno.oSemestre,
+        oCarreraID: (alumno.oCarreraID == null) ?  data.Carreras_ID : alumno.oCarreraID,
       }).then(() =>
         MySwal.fire({
           title: "Registro Editado",
@@ -118,13 +125,16 @@ const EditarAlumno = () => {
           onChange={({ target }) => onChange(target.value, "oSemestre")}
           required={true}
         />
-        <CustomTextField
+        {/* <CustomTextField
           label={"Carrera"}
           type="number"
-          value={alumno.oCarreras_ID}
-          onChange={({ target }) => onChange(target.value, "oCarreras_ID")}
+          value={alumno.oCarreraID}
+          onChange={({ target }) => onChange(target.value, "oCarreraID")}
           required={true}
-        />
+        /> */}
+        <Stack direction={"column"} margin={"20px"} spacing={4}>
+            <CustomSelect label={"Carrera"} data={carrera} onChange={onChange} />
+        </Stack>
       </Stack>
       <Stack direction={"row"} justifyContent="space-evenly" mt={"64px"}>
         <CustomButton
