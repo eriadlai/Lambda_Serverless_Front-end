@@ -1,4 +1,4 @@
-import { MenuItem, Select, Stack } from "@mui/material";
+import { Stack } from "@mui/material";
 import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { BaseApiUrl } from "../../api/ApiUrl";
@@ -16,13 +16,13 @@ const EditarAlumno = () => {
   const location = useLocation();
 
   const { id } = useParams();
-  const {state: data} = useLocation()
+  const { state: data } = useLocation();
   const [carrera, setCarreras] = React.useState([]);
 
   React.useEffect(() => {
     BaseApiUrl.get("/Carrera").then((carrera) => setCarreras(carrera.data[0]));
   }, []);
-  
+
   const {
     oNombre,
     oApellido,
@@ -57,14 +57,19 @@ const EditarAlumno = () => {
 
   const guardarAlumno = async () => {
     try {
-      await BaseApiUrl.put("/Alumno",{
+      await BaseApiUrl.put("/Alumno", {
         oID: id,
-        oNombre:  (alumno.oNombre == null) ?  data.Nombre : alumno.oNombre,
-        oApellido: (alumno.oApellido == null) ?  data.Apellido : alumno.oApellido,
-        oMatricula: (alumno.oMatricula == null) ?  data.Matricula : alumno.oMatricula,
-        oFecha_Nacimiento: (alumno.oFecha_Nacimiento == null) ?  data.Fecha_Nacimiento : alumno.oFecha_Nacimiento,
-        oSemestre: (alumno.oSemestre == null) ?  data.Semestre : alumno.oSemestre,
-        oCarreraID: (alumno.oCarreraID == null) ?  data.Carreras_ID : alumno.oCarreraID,
+        oNombre: alumno.oNombre == null ? data.Nombre : alumno.oNombre,
+        oApellido: alumno.oApellido == null ? data.Apellido : alumno.oApellido,
+        oMatricula:
+          alumno.oMatricula == null ? data.Matricula : alumno.oMatricula,
+        oFecha_Nacimiento:
+          alumno.oFecha_Nacimiento == null
+            ? data.Fecha_Nacimiento
+            : alumno.oFecha_Nacimiento,
+        oSemestre: alumno.oSemestre == null ? data.Semestre : alumno.oSemestre,
+        oCarreraID:
+          alumno.oCarreraID == null ? data.Carreras_ID : alumno.oCarreraID,
       }).then(() =>
         MySwal.fire({
           title: "Registro Editado",
@@ -125,15 +130,13 @@ const EditarAlumno = () => {
           onChange={({ target }) => onChange(target.value, "oSemestre")}
           required={true}
         />
-        <Stack direction={"column"} margin={"20px"} spacing={4}>
-          <CustomSelect
-          label={"Carrera"}
+        <CustomSelect
+          label={data.Carreras_ID}
           value={alumno.oCarreraID}
           onChange={({ target }) => onChange(target.value, "oCarreraID")}
           required={true}
           data={carrera}
-          />
-        </Stack>
+        />
       </Stack>
       <Stack direction={"row"} justifyContent="space-evenly" mt={"64px"}>
         <CustomButton

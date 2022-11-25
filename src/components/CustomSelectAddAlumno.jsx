@@ -1,17 +1,9 @@
 import React from "react";
 import { MenuItem, Select, Stack } from "@mui/material";
-import CustomSimpleTitle from "./CustomSimpleTitle";
 
-const CustomSelect = ({ label, value, style, onChange, data }) => {
-  var oLabel = "";
-  data?.map((oCarrera) => {
-    if (oCarrera.ID === label) {
-      oLabel = oCarrera.Nombre;
-    }
-  });
+const CustomSelectAddAlumno = ({ label, value, style, onChange, data }) => {
   return (
     <>
-      <CustomSimpleTitle titulo={"Carrera Actual: " + oLabel} mb={5} />
       <Stack direction={"column"} margin={"20px"} spacing={4}>
         <Select
           label={label}
@@ -32,4 +24,4 @@ const CustomSelect = ({ label, value, style, onChange, data }) => {
   );
 };
 
-export default CustomSelect;
+export default CustomSelectAddAlumno;
