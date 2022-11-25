@@ -1,4 +1,4 @@
-import { Stack } from "@mui/material";
+import { MenuItem, Select, Stack } from "@mui/material";
 import React, { useState } from "react";
 import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { BaseApiUrl } from "../../api/ApiUrl";
@@ -22,7 +22,7 @@ const EditarAlumno = () => {
   React.useEffect(() => {
     BaseApiUrl.get("/Carrera").then((carrera) => setCarreras(carrera.data[0]));
   }, []);
-  console.log(carrera)
+  
   const {
     oNombre,
     oApellido,
@@ -125,15 +125,14 @@ const EditarAlumno = () => {
           onChange={({ target }) => onChange(target.value, "oSemestre")}
           required={true}
         />
-        {/* <CustomTextField
+        <Stack direction={"column"} margin={"20px"} spacing={4}>
+          <CustomSelect
           label={"Carrera"}
-          type="number"
           value={alumno.oCarreraID}
           onChange={({ target }) => onChange(target.value, "oCarreraID")}
           required={true}
-        /> */}
-        <Stack direction={"column"} margin={"20px"} spacing={4}>
-            <CustomSelect label={"Carrera"} data={carrera} onChange={onChange} />
+          data={carrera}
+          />
         </Stack>
       </Stack>
       <Stack direction={"row"} justifyContent="space-evenly" mt={"64px"}>

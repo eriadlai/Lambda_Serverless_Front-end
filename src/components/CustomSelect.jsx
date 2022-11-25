@@ -1,30 +1,24 @@
 import React from "react";
-import TextField from "@mui/material/TextField";
-import Autocomplete from "@mui/material/Autocomplete";
+import { MenuItem, Select } from "@mui/material";
 
-const CustomSelect = ({ label, data, style, onChange }) => {
-  const [value, setValue] = React.useState(data[0]);
-  const [inputValue, setInputValue] = React.useState("");
-
-  const handleChange = (event, newValue) => {
-    setValue(newValue);
-    onChange(newValue, label);
-  };
+const CustomSelect = ({ label, value, style, onChange,data }) => {
 
   return (
     <div>
-      <Autocomplete
-        value={value}
-        onChange={handleChange}
-        inputValue={inputValue}
-        onInputChange={(event, newInputValue) => {
-          setInputValue(newInputValue);
-        }}
-        id="controllable-states-demo"
-        options={data}
-        sx={{ ...style }}
-        renderInput={(params) => <TextField {...params} label={label} />}
-      />
+      <Select
+            label={label}
+            id="controllable-states-demo"
+            value={value}
+            onChange={onChange}
+            variant="outlined"
+            sx={{...style}}
+          >
+            {data?.map((oCarrera) => (
+            <MenuItem value={oCarrera.ID}>{oCarrera.Nombre}</MenuItem>
+          ))}
+            
+          </Select>
+      
     </div>
   );
 };
