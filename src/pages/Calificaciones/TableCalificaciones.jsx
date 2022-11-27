@@ -67,10 +67,15 @@ const Table = () => {
               variant="contained"
               onClick={() => handleDelete(cellValues.row.ID)}
               texto="Eliminar"
-              styles={{marginRight:2, borderColor:"#d32f2f", color:"#d32f2f", '&:hover': {
-                backgroundColor: '#d32f2f',
-                color: 'black',
-            }}}
+              styles={{
+                marginRight: 2,
+                borderColor: "#d32f2f",
+                color: "#d32f2f",
+                "&:hover": {
+                  backgroundColor: "#d32f2f",
+                  color: "black",
+                },
+              }}
             >
               Borrar
             </CustomButton>
