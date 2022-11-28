@@ -14,7 +14,6 @@ const Table = () => {
   const navigate = useNavigate();
   const [alumno, setAlumno] = React.useState([]);
   const oToken = React.useContext(TokenContext);
-  console.log(oToken);
   React.useEffect(() => {
     BaseApiUrl.get("/Alumno").then((alumno) => setAlumno(alumno.data[0]));
   }, []);
@@ -24,7 +23,6 @@ const Table = () => {
   };
 
   const handleDelete = (id) => {
-    console.log(id);
     BaseApiUrl.delete("/Alumno", { data: { oID: id } })
       .then((res) => {
         console.log(res);

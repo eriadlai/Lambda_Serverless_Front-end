@@ -13,6 +13,12 @@ const App = () => {
     let updateUser = async (authState) => {
       try {
         let user = await Auth.currentAuthenticatedUser();
+        await Auth.currentSession().then((res) => {
+          let accessToken = res.getAccessToken();
+          let jwt = accessToken.getJwtToken();
+          console.log(`myAccessToken: ${JSON.stringify(accessToken)}`);
+          console.log(`myJwt: ${jwt}`);
+        });
         setUser(user);
       } catch {
         setUser(null);
@@ -22,7 +28,7 @@ const App = () => {
     updateUser(); // check manually the first time because we won't get a Hub event
     return () => Hub.remove("auth", updateUser); // cleanup
   }, []);
-
+  console.log(user);
   const darkmode = useSelector((state) => state.darkmode);
 
   const theme = useMemo(
@@ -57,9 +63,7 @@ const App = () => {
   );
   return (
     <BrowserRouter>
-      <TokenContext.Provider
-        value={user?.signInUserSession.accessToken.jwtToken}
-      >
+      <TokenContext.Provider value={user}>
         <AlumnosContextProvider>
           <ThemeProvider theme={theme}>
             <Router />

@@ -1,6 +1,6 @@
 import { Box, Card, CardContent, Typography } from "@mui/material";
 import React from "react";
-
+import Table from "./TablaDocentes";
 const Docentes = () => {
   return (
     <Box flex={4} p={2}>
@@ -8,7 +8,7 @@ const Docentes = () => {
         <Card sx={{ margin: 10 }}>
           <CardContent>
             <Typography variant="body2" color="text.secondary">
-              Docentes
+              <Table />
             </Typography>
           </CardContent>
         </Card>

@@ -13,14 +13,14 @@
     },
     "categories": {
       "auth": {
-        "lambdaserverlessfron1a7b4bc6": {
+        "lambdaserverlessfron5e52ffdb": {
           "userPoolId": "us-west-1_SXzBRDZvQ",
           "userPoolName": "UniversidadesPool",
           "webClientId": "7mh8fb7hqq47i6ocqoopqlgqv5",
           "nativeClientId": "7shjh09uptim152gkdnibod37l",
           "identityPoolId": "us-west-1:1026a1af-7191-47a7-97b9-2154747e7f5c",
           "identityPoolName": "IdentityPoolUniversidad",
-          "allowUnauthenticatedIdentities": true,
+          "allowUnauthenticatedIdentities": false,
           "authRoleArn": "arn:aws:iam::832093691595:role/Cognito_IdentityPoolUniversidadAuth_Role",
           "authRoleName": "Cognito_IdentityPoolUniversidadAuth_Role",
           "unauthRoleArn": "arn:aws:iam::832093691595:role/Cognito_IdentityPoolUniversidadUnauth_Role",
