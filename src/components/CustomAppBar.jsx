@@ -17,6 +17,7 @@ import {
 import IconButton from "@mui/material/IconButton";
 import MenuIcon from "@mui/icons-material/Menu";
 import AppBar from "@mui/material/AppBar";
+import { Auth } from "aws-amplify";
 
 const drawerWidth = 240;
 
@@ -62,6 +63,13 @@ const StyledInputBase = styled(InputBase)(({ theme }) => ({
 }));
 
 const MenuOptions = () => {
+  async function signOut() {
+    try {
+      await Auth.signOut();
+    } catch (error) {
+      console.log("error signing out: ", error);
+    }
+  }
   // Hook para conocer el tamaño de la pantalla
   const forMobile = useMediaQuery("(min-width:600px)");
 
@@ -118,7 +126,7 @@ const MenuOptions = () => {
             <MenuItem onClick={() => dispatch(SwitchDarkMode())}>
               {darkMode ? "Modo claro" : "Modo oscuro"}
             </MenuItem>
-            <MenuItem>Cerrar Sesión</MenuItem>
+            <MenuItem onClick={() => signOut()}>Cerrar Sesión</MenuItem>
           </Menu>
         </>
       ) : (

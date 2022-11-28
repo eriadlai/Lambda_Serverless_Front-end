@@ -1,10 +1,28 @@
 import { createTheme, ThemeProvider } from "@mui/material";
 import Router from "./routes/Routes";
 import AlumnosContextProvider from "./context/alumnosContext";
+import TokenContext from "./context/TokenContext";
 import { useSelector } from "react-redux";
 import { BrowserRouter } from "react-router-dom";
-import { useMemo } from "react";
+import { useEffect, useMemo, useState } from "react";
+import { withAuthenticator } from "@aws-amplify/ui-react";
+import { Auth, Hub } from "aws-amplify";
 const App = () => {
+  let [user, setUser] = useState(null);
+  useEffect(() => {
+    let updateUser = async (authState) => {
+      try {
+        let user = await Auth.currentAuthenticatedUser();
+        setUser(user);
+      } catch {
+        setUser(null);
+      }
+    };
+    Hub.listen("auth", updateUser); // listen for login/signup events
+    updateUser(); // check manually the first time because we won't get a Hub event
+    return () => Hub.remove("auth", updateUser); // cleanup
+  }, []);
+
   const darkmode = useSelector((state) => state.darkmode);
 
   const theme = useMemo(
@@ -39,13 +57,17 @@ const App = () => {
   );
   return (
     <BrowserRouter>
-      <AlumnosContextProvider>
-        <ThemeProvider theme={theme}>
-          <Router />
-        </ThemeProvider>
-      </AlumnosContextProvider>
+      <TokenContext.Provider
+        value={user?.signInUserSession.accessToken.jwtToken}
+      >
+        <AlumnosContextProvider>
+          <ThemeProvider theme={theme}>
+            <Router />
+          </ThemeProvider>
+        </AlumnosContextProvider>
+      </TokenContext.Provider>
     </BrowserRouter>
   );
 };
 
-export default App;
+export default withAuthenticator(App);

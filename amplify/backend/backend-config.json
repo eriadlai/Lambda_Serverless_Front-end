@@ -1,0 +1,11 @@
+{
+  "auth": {
+    "lambdaserverlessfron1a7b4bc6": {
+      "service": "Cognito",
+      "serviceType": "imported",
+      "providerPlugin": "awscloudformation",
+      "dependsOn": [],
+      "customAuth": false
+    }
+  }
+}

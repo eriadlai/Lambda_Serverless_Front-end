@@ -8,11 +8,13 @@ import { Box } from "@mui/system";
 import CustomButton from "../../components/CustomButton";
 import CustomSimpleTitle from "../../components/CustomSimpleTitle";
 import { Stack } from "@mui/material";
+import TokenContext from "../../context/TokenContext";
 const MySwal = withReactContent(Swal);
 const Table = () => {
   const navigate = useNavigate();
   const [alumno, setAlumno] = React.useState([]);
-
+  const oToken = React.useContext(TokenContext);
+  console.log(oToken);
   React.useEffect(() => {
     BaseApiUrl.get("/Alumno").then((alumno) => setAlumno(alumno.data[0]));
   }, []);
