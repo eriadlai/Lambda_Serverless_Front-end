@@ -11,6 +11,8 @@ import Carreras from "../pages/Carreras/Carreras";
 import AgregarCarreras from "../pages/Carreras/AgregarCarreras";
 import EditarCarreras from "../pages/Carreras/EditarCarreras";
 import Docentes from "../pages/Docentes/Docentes";
+import AgregarDocentes from "../pages/Docentes/AgregarDocentes";
+import EditarDocente from "../pages/Docentes/EditarDocentes";
 import Grupos from "../pages/Grupos/Grupos";
 import Materias from "../pages/Materias/Materias";
 import AgregarMaterias from "../pages/Materias/AgregarMaterias";
@@ -42,6 +44,14 @@ const Router = () => {
             element={<EditarCarreras />}
           />
           <Route path="/Docentes" element={<Docentes />} />
+          <Route
+            path="/Docente/Agregar-Docente"
+            element={<AgregarDocentes />}
+          />
+          <Route
+            path="/Docentes/Editar-Docente/:id"
+            element={<EditarDocente />}
+          />
           <Route path="/Grupos" element={<Grupos />} />
           <Route path="/Materias" element={<Materias />} />
           <Route

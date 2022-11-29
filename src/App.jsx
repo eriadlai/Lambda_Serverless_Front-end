@@ -28,7 +28,7 @@ const App = () => {
     updateUser(); // check manually the first time because we won't get a Hub event
     return () => Hub.remove("auth", updateUser); // cleanup
   }, []);
-  console.log(user);
+  console.log(user?.signInUserSession.accessToken.jwtToken);
   const darkmode = useSelector((state) => state.darkmode);
 
   const theme = useMemo(
@@ -63,7 +63,7 @@ const App = () => {
   );
   return (
     <BrowserRouter>
-      <TokenContext.Provider value={oAccessToken}>
+      <TokenContext.Provider value={user}>
         <AlumnosContextProvider>
           <ThemeProvider theme={theme}>
             <Router />

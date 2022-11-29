@@ -31,12 +31,12 @@ const EditarAlumno = () => {
     oSemestre,
     oCarreraID,
   } = useForm({
-    oNombre: location?.state.nombre,
-    oApellido: location?.state.apellido,
-    oMatricula: location?.state.matricula,
-    oFecha_Nacimiento: location?.state.fecha_nacimiento,
-    oSemestre: location?.state.semestre,
-    oCarreraID: location?.state.carreras_id,
+    oNombre: location?.state.Nombre,
+    oApellido: location?.state.Apellido,
+    oMatricula: location?.state.Matricula,
+    oFecha_Nacimiento: location?.state.Fecha_nacimiento,
+    oSemestre: location?.state.Semestre,
+    oCarreraID: location?.state.Carreras_id,
   });
 
   const [alumno, setAlumno] = useState({
