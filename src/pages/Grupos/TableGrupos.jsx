@@ -12,24 +12,18 @@ import TokenContext from "../../context/TokenContext";
 const MySwal = withReactContent(Swal);
 const Table = () => {
   const navigate = useNavigate();
-  const [docente, setDocente] = React.useState([]);
+  const [grupo, setGrupo] = React.useState([]);
   const oToken = React.useContext(TokenContext);
-  const config = {
-    headers: {
-      Authorization: oToken,
-      "Access-Control-Allow-Origin": "*",
-    },
-  };
   React.useEffect(() => {
-    BaseApiUrl.get("/Docentes", config).then((docente) => setDocente(docente));
+    BaseApiUrl.get("/Grupos").then((grupo) => setGrupo(grupo.data[0]));
   }, []);
 
   const handleEdit = (data) => {
-    navigate("/Docentes/Editar-Docente/" + data.ID, { state: data });
+    navigate("/Grupos/Editar-Grupo/" + data.ID, { state: data });
   };
 
   const handleDelete = (id) => {
-    BaseApiUrl.delete("/Docente", { data: { oID: id } })
+    BaseApiUrl.delete("/Grupo", { data: { oID: id } })
       .then((res) => {
         console.log(res);
         MySwal.fire({
@@ -55,30 +49,20 @@ const Table = () => {
       headerName: "ID",
       width: 150,
     },
-    { field: "Nombre", headerName: "Nombre", width: 300 },
+    { field: "salon", headerName: "Salon", width: 300 },
     {
-      field: "Apellido",
-      headerName: "Apellido",
+      field: "Materia_id",
+      headerName: "Materia_id",
       width: 150,
     },
     {
-      field: "Matricula",
-      headerName: "Matricula",
+      field: "docente_id",
+      headerName: "docente_id",
       width: 150,
     },
     {
-      field: "Titulo",
-      headerName: "Titulo",
-      width: 150,
-    },
-    {
-      field: "Telefono",
-      headerName: "Telefono",
-      width: 150,
-    },
-    {
-      field: "Correo",
-      headerName: "Correo",
+      field: "Alumno_id",
+      headerName: "Alumno_id",
       width: 150,
     },
     {
@@ -118,11 +102,11 @@ const Table = () => {
   ];
   return (
     <>
-      <CustomSimpleTitle titulo={"Docentes"} mb={2} />{" "}
+      <CustomSimpleTitle titulo={"Grupos"} mb={2} />{" "}
       <Stack direction={"row"}>
         <CustomButton
-          texto={"Agregar Docente"}
-          onClick={() => navigate("/Docente/Agregar-Docente")}
+          texto={"Agregar Grupo"}
+          onClick={() => navigate("/Grupo/Agregar-Grupo")}
           styles={{
             marginLeft: "30px",
           }}
@@ -131,10 +115,10 @@ const Table = () => {
       <div style={{ height: 600, width: "100%", padding: 30 }}>
         <Box sx={{ height: 400, width: "100%" }}>
           <DataGrid
-            rows={docente}
+            rows={grupo}
             columns={columns}
             rowsPerPageOptions={[10]}
-            getRowId={(docente) => docente.ID}
+            getRowId={(grupo) => grupo.ID}
             checkboxSelection
             disableSelectionOnClick
           />

@@ -8,7 +8,8 @@ import { useEffect, useMemo, useState } from "react";
 import { withAuthenticator } from "@aws-amplify/ui-react";
 import { Auth, Hub } from "aws-amplify";
 const App = () => {
-  let [user, setUser] = useState(null);
+  const [user, setUser] = useState(null);
+  const [oAccessToken, setAccessToken] = useState(null);
   useEffect(() => {
     let updateUser = async (authState) => {
       try {
@@ -16,8 +17,7 @@ const App = () => {
         await Auth.currentSession().then((res) => {
           let accessToken = res.getAccessToken();
           let jwt = accessToken.getJwtToken();
-          console.log(`myAccessToken: ${JSON.stringify(accessToken)}`);
-          console.log(`myJwt: ${jwt}`);
+          setAccessToken(jwt);
         });
         setUser(user);
       } catch {
@@ -63,7 +63,7 @@ const App = () => {
   );
   return (
     <BrowserRouter>
-      <TokenContext.Provider value={user}>
+      <TokenContext.Provider value={oAccessToken}>
         <AlumnosContextProvider>
           <ThemeProvider theme={theme}>
             <Router />
