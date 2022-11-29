@@ -60,7 +60,7 @@ const Navbar = ({ mode, setMode }) => {
           sx={{ mr: 2, display: { xs: "block", sm: "none" } }}
           onClick={(e) => setOpenSidebar(true)}
         >
-          <MenuIcon  />
+          <MenuIcon />
         </IconButton>
         <Typography variant="h6" sx={{ display: { xs: "none", sm: "block" } }}>
           Mi Campus Cetys - Lambda
@@ -70,15 +70,16 @@ const Navbar = ({ mode, setMode }) => {
             <NotificationsRoundedIcon />
           </Badge>
           <Avatar
-            sx={{ 
+            sx={{
               width: 30,
               height: 30,
-              bgcolor:"red"}}
+              bgcolor: "red",
+            }}
             onClick={(e) => setOpen(true)}
           />
         </Icons>
         <UserBox onClick={(e) => setOpen(true)}>
-          <Avatar sx={{ width: 30, height: 30, bgcolor:"red"}} />
+          <Avatar sx={{ width: 30, height: 30, bgcolor: "red" }} />
           <Typography variant="span">Adlai</Typography>
         </UserBox>
       </StyledToolbar>

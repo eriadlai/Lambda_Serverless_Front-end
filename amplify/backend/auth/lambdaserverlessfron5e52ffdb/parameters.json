@@ -1,0 +1,22 @@
+{
+  "authSelections": "identityPoolAndUserPool",
+  "resourceName": "lambdaserverlessfron5e52ffdb",
+  "serviceType": "imported",
+  "region": "us-west-1",
+  "authProvidersUserPool": [],
+  "requiredAttributes": [
+    "email"
+  ],
+  "passwordPolicyMinLength": 8,
+  "passwordPolicyCharacters": [
+    "Requires Lowercase",
+    "Requires Uppercase",
+    "Requires Numbers",
+    "Requires Symbols"
+  ],
+  "mfaConfiguration": "OFF",
+  "autoVerifiedAttributes": [
+    "email"
+  ],
+  "mfaTypes": []
+}
