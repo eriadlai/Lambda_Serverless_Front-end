@@ -14,6 +14,8 @@ import Docentes from "../pages/Docentes/Docentes";
 import AgregarDocentes from "../pages/Docentes/AgregarDocentes";
 import EditarDocente from "../pages/Docentes/EditarDocentes";
 import Grupos from "../pages/Grupos/Grupos";
+import AgregarGrupos from "../pages/Grupos/AgregarGrupos";
+import EditarGrupos from "../pages/Grupos/EditarGrupos";
 import Materias from "../pages/Materias/Materias";
 import AgregarMaterias from "../pages/Materias/AgregarMaterias";
 import EditarMaterias from "../pages/Materias/EditarMaterias";
@@ -53,6 +55,8 @@ const Router = () => {
             element={<EditarDocente />}
           />
           <Route path="/Grupos" element={<Grupos />} />
+          <Route path="/Grupos/Agregar-Grupo" element={<AgregarGrupos />} />
+          <Route path="/Grupos/Editar-Grupo/:id" element={<EditarGrupos />} />
           <Route path="/Materias" element={<Materias />} />
           <Route
             path="/Materia/Agregar-Materia"

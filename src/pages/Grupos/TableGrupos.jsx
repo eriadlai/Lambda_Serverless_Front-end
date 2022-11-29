@@ -13,6 +13,9 @@ const MySwal = withReactContent(Swal);
 const Table = () => {
   const navigate = useNavigate();
   const [grupo, setGrupo] = React.useState([]);
+  const [materia, setMateria] = React.useState([]);
+  const [docente, setDocente] = React.useState([]);
+  const [alumno, setAlumno] = React.useState([]);
   const oToken = React.useContext(TokenContext);
   const at =
     "eyJraWQiOiJPZVR2RkZSeEZFd2cyazJmSWlUd0ZtY041OXErenFKVFwvNnNnYnFTSHI0bz0iLCJhbGciOiJSUzI1NiJ9.eyJzdWIiOiIzZWY3NDdlZC1kYjBiLTQ0OTMtYjY5Ni00NzQ3ZWU3OTIzNTIiLCJ0b2tlbl91c2UiOiJhY2Nlc3MiLCJzY29wZSI6ImF3cy5jb2duaXRvLnNpZ25pbi51c2VyLmFkbWluIHBob25lIG9wZW5pZCBwcm9maWxlIGVtYWlsIiwiYXV0aF90aW1lIjoxNjY5NjkyNzUzLCJpc3MiOiJodHRwczpcL1wvY29nbml0by1pZHAudXMtd2VzdC0xLmFtYXpvbmF3cy5jb21cL3VzLXdlc3QtMV9TWHpCUkRadlEiLCJleHAiOjE2Njk3NzkxNTMsImlhdCI6MTY2OTY5Mjc1MywidmVyc2lvbiI6MiwianRpIjoiZjUzYmQ5NzQtYTdjMC00NDI0LTg5ZDctYjdkYTAzYzYwODQ2IiwiY2xpZW50X2lkIjoiN3NoamgwOXVwdGltMTUyZ2tkbmlib2QzN2wiLCJ1c2VybmFtZSI6ImVyaWFkbGFpIn0.p26pdvPznyS5aoHViSKsvgidP3l55HFtAHx98Kd_-5vKsxlvAhKVPgs-mkJ1xUpecRMW4MC2lvxeghlGA9f1Re8wVlKQ3jpvNxT9r-HDgLB70c-QHKPgNISUvVelwSVqW1tM2bjW5VnuOjwYKPzxnnCPvdgUasTODbqy46_2LZxTArP9lyhKjGJ4UAxX1_SBxLKMuvPlirMXl1z7i3hCEyNIqFYloL7OppUG4Fm_ac9Fh4qW5DIUoLl58pusaPCpYLO01PHWGrBmrMzx2vF5YANZJIOkIVhYyVYDE4DOh5VSIjFkInTl0Ox74qaGGdL-CwSSdoN_JR2CeChBi1c4pQ";
@@ -22,15 +25,19 @@ const Table = () => {
     },
   };
   React.useEffect(() => {
-    BaseApiUrl.get("/Grupos", config).then((grupo) => setGrupo(grupo.data[0]));
+    BaseApiUrl.get("/Grupos").then((grupo) => setGrupo(grupo.data.docentes));
+    BaseApiUrl.get("/Materia").then((materia) => setMateria(materia.data[0]));
+    BaseApiUrl.get("/Docentes", config).then((docente) =>
+      setDocente(docente.data.docentes)
+    );
+    BaseApiUrl.get("/Alumno").then((alumno) => setAlumno(alumno.data[0]));
   }, []);
-  console.log(grupo);
   const handleEdit = (data) => {
-    navigate("/Grupos/Editar-Grupo/" + data.ID, { state: data });
+    navigate("/Grupos/Editar-Grupo/" + data.id, { state: data });
   };
 
   const handleDelete = (id) => {
-    BaseApiUrl.delete("/Grupo", { data: { oID: id } })
+    BaseApiUrl.delete("/Grupos", { data: { oID: id } })
       .then((res) => {
         console.log(res);
         MySwal.fire({
@@ -52,25 +59,46 @@ const Table = () => {
   };
   const columns = [
     {
-      field: "ID",
+      field: "id",
       headerName: "ID",
       width: 150,
     },
     { field: "salon", headerName: "Salon", width: 300 },
     {
-      field: "Materia_id",
+      field: "materia_id",
       headerName: "Materia_id",
       width: 150,
+      renderCell: (cellValues) => {
+        materia?.map((oDato) => {
+          if (oDato.ID === cellValues.row.materia_id) {
+            return <>{oDato.Nombre}</>;
+          }
+        });
+      },
     },
     {
       field: "docente_id",
       headerName: "docente_id",
       width: 150,
+      renderCell: (cellValues) => {
+        docente?.map((oDato) => {
+          if (oDato.ID === cellValues.row.docente_id) {
+            return <>{oDato.nombre + " " + oDato.apellido}</>;
+          }
+        });
+      },
     },
     {
-      field: "Alumno_id",
+      field: "alumno_id",
       headerName: "Alumno_id",
       width: 150,
+      renderCell: (cellValues) => {
+        alumno?.map((oDato) => {
+          if (oDato.ID === cellValues.row.alumno_id) {
+            return <>{oDato.Nombre}</>;
+          }
+        });
+      },
     },
     {
       field: "acciones",
@@ -81,7 +109,7 @@ const Table = () => {
           <>
             <CustomButton
               variant="contained"
-              onClick={() => handleDelete(cellValues.row.ID)}
+              onClick={() => handleDelete(cellValues.row.id)}
               texto="Eliminar"
               styles={{
                 marginRight: 2,
@@ -113,7 +141,7 @@ const Table = () => {
       <Stack direction={"row"}>
         <CustomButton
           texto={"Agregar Grupo"}
-          onClick={() => navigate("/Grupo/Agregar-Grupo")}
+          onClick={() => navigate("/Grupos/Agregar-Grupo")}
           styles={{
             marginLeft: "30px",
           }}
@@ -125,7 +153,7 @@ const Table = () => {
             rows={grupo}
             columns={columns}
             rowsPerPageOptions={[10]}
-            getRowId={(grupo) => grupo.ID}
+            getRowId={(grupo) => grupo.id}
             checkboxSelection
             disableSelectionOnClick
           />
