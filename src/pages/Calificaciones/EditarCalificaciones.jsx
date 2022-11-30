@@ -18,7 +18,7 @@ const EditarCalificaciones = () => {
   const { state: data } = useLocation();
 
   const { oEvaluacion } = useForm({
-    oEvaluacion: location?.state.evaluacion,
+    oEvaluacion: location?.state.Evaluacion,
   });
 
   const [calificacion, setCalificacion] = useState({

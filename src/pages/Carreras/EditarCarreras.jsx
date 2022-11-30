@@ -17,7 +17,7 @@ const EditarCarreras = () => {
   const { id } = useParams();
   const { state: data } = useLocation();
   const { oNombre } = useForm({
-    oNombre: location?.state.nombre,
+    oNombre: location?.state.Nombre,
   });
 
   const [carrera, setCarrera] = useState({
